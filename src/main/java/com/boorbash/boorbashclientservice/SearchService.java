@@ -1,6 +1,8 @@
 package com.boorbash.boorbashclientservice;
 
 import com.boorbash.boorbashclientservice.interfaces.RestaurantData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,8 +10,11 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+
 @RestController
 public class SearchService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchService.class);
+
     private static final List<RestaurantData> SAMPLE_RESULTS = Arrays.asList(
             RestaurantData.of(
                     "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwzfHxicnVzY2hldHRhfGVufDF8fHx8MTY1NDg5OTI2MA&ixlib=rb-1.2.1&q=80&w=200",
@@ -27,6 +32,8 @@ public class SearchService {
 
     @GetMapping("restaurantSearch")
     public List<RestaurantData> restaurantSearch(String searchString) {
+        LOGGER.debug("Entering restaurant search", searchString);
         return SAMPLE_RESULTS;
     }
+
 }
