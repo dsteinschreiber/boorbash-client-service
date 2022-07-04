@@ -4,6 +4,7 @@ import com.boorbash.boorbashclientservice.interfaces.RestaurantData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -34,11 +35,14 @@ public class SearchService {
 //    );
 
     @GetMapping("restaurantSearch")
-    public List<RestaurantData> restaurantSearch(String searchString) {
-        LOGGER.debug("Entering restaurant search", searchString);
+    public List<RestaurantData> restaurantSearch(@RequestParam("searchString") String searchString) {
+        LOGGER.debug("Entering restaurant search " + searchString);
 
         return this.webClient.get()
-                .uri("restaurantSearch")
+                .uri(x -> x
+                        .path("/restaurantSearch")
+                        .queryParam("searchString", searchString)
+                        .build())
                 .retrieve()
                 .bodyToMono(List.class)
                 .block();
