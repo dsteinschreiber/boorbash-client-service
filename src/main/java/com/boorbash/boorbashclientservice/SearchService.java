@@ -1,6 +1,6 @@
 package com.boorbash.boorbashclientservice;
 
-import com.boorbash.boorbashclientservice.interfaces.RestaurantData;
+import com.boorbash.interfaces.RestaurantData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
